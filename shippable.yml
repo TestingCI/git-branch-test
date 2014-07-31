@@ -1,12 +1,26 @@
 language: python
 python:
  - 2.7
-env:
+ 
+install:
+  - pip install -r requirements.txt
+ 
+env:  
   global:
-    - secure: j0MY6QdPS28XAaZc0qiFCl17SlcoDAE2swMRFonl4qHeyg2ICsLoLWRiDz0DEvRXlwYuRXhiGvtNgSAqyMLDpydu3P1SM/E6JX1kgC0tFHKWRLxVKYUQrVZTEbKdWXvssUcIW6J7f+TJiX7WoVyoA36BajvzDJ1QM/njxikv2p7ooDJXF/xJB8H/Hti5wI9ti2eOOnyOH7DZiZFJpxo+ajTrpqXXqCLvg2yPRjdkoxLM5POYQCFwXUwqBACJPS2XxntWUB7ObJNaMbecK3KaQM+BGstBPIpM9b3mDK5qtkWqWbtSA6hyEbEfKmvPgr7MI3QZuW42jC90krJ5Wv2cHQ==  
-    - myvar= hello
-install: true
+    - BAR=foo
+    - secure: hitmmQLJTdyRCkIMD2xbdYHKGoaD8PsCDigO9q/nsdXEmN2sUjhiUBuaRuGYXhv/TLEpROXgX3xiVrnDsrxcC67oBrDYHC5Zc3eEV7/Gqdg93q90QOb2URfAnUZtUsKIFPIDIt3XYpdpkOmRSLVDGxXKVrR89VqvVieK6cRgHWqBHrUrER6mkhEJVd3Eo/GZJeYhZGoH03fXamzEeTTu3e9n3CX19Yf0/zy0CYU/zqGK7mL87cfDBqyk1nGFchjhp7CxhJKM13uVg57R6oj2I+4I9iyUvJLjKZCRUIHx2IN1wtYwAWP0x58jZi5Wn0I3oBB4QirW9/JlUG0kSVIv0w==
+ 
+before_script:
+  - pip list
+  - echo $FOO
+  - echo $BAR
+  - ./tests/run --prepare
+ 
 script:
- - git rev-parse --abbrev-ref HEAD
- - echo $FOO and $BAR
- - echo $myvar
+  - ./tests/run --run
+ 
+after_script:
+  - ./tests/run --cleanup
+ 
+notifications:
+    email: false
