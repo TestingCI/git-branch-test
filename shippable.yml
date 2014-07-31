@@ -1,10 +1,7 @@
 language: python
 python:
  - 2.7
- 
-install:
-  - pip install -r requirements.txt
- 
+
 env:  
   global:
     - BAR=foo
@@ -14,13 +11,8 @@ before_script:
   - pip list
   - echo $FOO
   - echo $BAR
-  - ./tests/run --prepare
+#  - ./tests/run --prepare
  
-script:
-  - ./tests/run --run
- 
-after_script:
-  - ./tests/run --cleanup
- 
+
 notifications:
     email: false
