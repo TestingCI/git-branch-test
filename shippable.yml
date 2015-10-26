@@ -10,3 +10,11 @@ script:
  - git rev-parse --abbrev-ref HEAD
  - echo $FOO and $BAR
  - echo $myvar
+notifications:
+     email:
+         recipients:
+             - vidya@shippable.com
+             - buildsampletest@gmail.com
+            # - vidyac.raghav@gmail.com
+         on_success: always
+         on_failure: always
